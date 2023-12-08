@@ -1,0 +1,155 @@
+---
+import Default from "@layouts/Default.astro";
+import Marked from "@components/Marked.astro";
+type Props = {
+  class?: string;
+  frontmatter: Record<string, string>;
+  rawContent: () => string;
+};
+const {
+  class: className,
+  frontmatter: { title, authors, cover },
+  rawContent,
+}: Props = Astro.props;
+---
+
+<Default title={title} class:list={["markdown highlighter", className]}>
+  {cover && <img src={cover} alt="" class="cover" />}
+  <p class="title">{title}</p>
+  <Marked raw={rawContent()} />
+  <div class="authors">
+    <p>
+      {authors.includes(",") ? "Authors" : "Author"}: <span>{authors}</span>
+    </p>
+  </div>
+</Default>
+
+<style is:global>
+  .markdown {
+    /* --hue: 350; */
+    --text-title: oklch(10% 0.05 var(--hue) / 85%);
+    --text-headings: oklch(30% 0.24 var(--hue) / 70%);
+    --text-list-item: oklch(45% 0.2 var(--hue) / 75%);
+    @apply my-4 rounded-lg bg-[--bg-darker] px-4 py-6 text-sm md:text-[1rem];
+
+    & .cover {
+      @apply aspect-[3.14] w-full rounded-xl;
+    }
+    & .title {
+      @apply mb-8 mt-6 w-full px-4;
+      @apply text-center indent-0 font-title text-[1.7em] leading-8 text-[--text-title];
+      text-wrap: balance;
+    }
+    & .authors * {
+      @apply mt-12 font-describe text-xl font-medium text-gray-600/60;
+      & span {
+        @apply bg-gradient-to-r from-[hsl(calc(var(--hue)-30)_70%_60%)] to-[hsl(calc(var(--hue)+30)_70%_60%)] bg-clip-text text-transparent;
+      }
+    }
+    & :is(h1, h2, h3) {
+      @apply font-sans font-medium text-[--text-headings];
+    }
+    & h1 {
+      @apply text-[1.5em];
+    }
+    & h2 {
+      @apply text-[1.25em];
+    }
+    & h3 {
+      @apply text-[1.125em];
+    }
+    & p {
+      @apply indent-6;
+    }
+    & :is(ol, ul, blockquote) p {
+      @apply indent-0;
+    }
+    & strong {
+      @apply font-medium;
+    }
+    & img {
+      @apply my-6 aspect-[22/9] w-full rounded-xl object-cover;
+    }
+    & code pre {
+      @apply mx-auto my-2 w-[min(768px,100%)] rounded-lg px-4 py-2 font-mono text-[13px] md:text-[15px];
+      @apply drop-shadow-lg;
+    }
+    & ol > li {
+      @apply ml-6 list-decimal;
+      &::marker {
+        @apply font-medium text-[--text-list-item];
+      }
+    }
+    & ul > li {
+      @apply ml-6 list-["🔹"];
+    }
+    & li + li {
+      @apply my-2;
+    }
+    & blockquote {
+      @apply my-2 rounded-r-lg border-l-[0.25rem] border-[hsl(var(--hue)_40%_50%)] bg-[--bg-darker] py-1 pl-4;
+      & > p {
+        @apply text-[0.9rem];
+      }
+    }
+  }
+</style>
+
+<script>
+  const main = document.querySelector("main") as HTMLElement;
+  const mainWidthDefault = main.offsetWidth;
+  const fontSizeDefault = parseFloat(
+    window.getComputedStyle(main).getPropertyValue("font-size"),
+  );
+  const ratio = 1.1;
+  const zoom = {
+    default: () => {
+      main.style.width = `${mainWidthDefault}px`;
+      main.style.fontSize = `${fontSizeDefault}px`;
+    },
+    in: () => {
+      const mainWidth = main.offsetWidth;
+      const fontSize = parseFloat(
+        window.getComputedStyle(main).getPropertyValue("font-size"),
+      );
+      main.style.width = `${mainWidth * ratio}px`;
+      main.style.fontSize = `${fontSize * ratio}px`;
+    },
+    out: () => {
+      const mainWidth = main.offsetWidth;
+      const fontSize = parseFloat(
+        window.getComputedStyle(main).getPropertyValue("font-size"),
+      );
+      main.style.width = `${mainWidth / ratio}px`;
+      main.style.fontSize = `${fontSize / ratio}px`;
+    },
+    fit: () => {
+      const mainWidth = main.offsetWidth;
+      main.style.width = `${window.screen.width}px`;
+      main.style.fontSize = `${
+        (fontSizeDefault * window.screen.width) / mainWidth
+      }px`;
+    },
+  };
+
+  document.addEventListener("keydown", (e) => {
+    if (e.ctrlKey) {
+      if (e.key == "=") {
+        e.preventDefault();
+        zoom.in();
+      }
+      if (e.key == "-") {
+        e.preventDefault();
+        zoom.out();
+      }
+      if (e.key == "0") {
+        e.preventDefault();
+        zoom.default();
+      }
+      if (e.key == "\\") {
+        e.preventDefault();
+        zoom.fit();
+      }
+    }
+  });
+</script>

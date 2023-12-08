@@ -1,0 +1,28 @@
+---
+import type { HTMLAttributes } from "astro/types";
+type Props = { title: string; class?: string } & HTMLAttributes<"form">;
+
+const { title, class: className, ...atrs }: Props = Astro.props;
+---
+
+<fieldset class={className}>
+  {title && <legend>{title}</legend>}
+  <form {...atrs}>
+    <slot />
+  </form>
+</fieldset>
+
+<style>
+  fieldset {
+    @apply border-2 border-dashed border-sky-500/50 px-4 py-2;
+    & legend {
+      @apply mx-4 line-clamp-1 max-w-[35%] px-2 font-normal text-sky-700;
+    }
+  }
+  form {
+    @apply grid grid-cols-[max-content,1fr] gap-x-3 gap-y-5;
+    & > * {
+      @apply grid-cols-[subgrid];
+    }
+  }
+</style>

@@ -1,0 +1,33 @@
+---
+export const prerender = false;
+import Default from "@layouts/Default.astro";
+import { supabase } from "@backend/supabase/server";
+const storage = supabase(Astro.cookies).storage;
+const bucket = storage.from("markdown");
+const { data, error } = await bucket.list();
+---
+
+<Default title="Welcome to my place" class="py-10">
+  <h1>This is from-cloud's posts</h1>
+  <h2>
+    {
+      data?.map(async (e) => {
+        if (e.name != ".emptyFolderPlaceholder") {
+          return (
+            <li class="list-decimal">
+              <a href={`${Astro.url.pathname}/${e.name}`}>{e.name}</a>
+            </li>
+          );
+        }
+      })
+    }
+  </h2>
+  <br />
+  <h1>
+    Take a look at <a
+      href={`${Astro.url.pathname}/posts-ssg`}
+      class="text-sky-600">SSG's posts</a
+    >
+     (prerender)
+  </h1>
+</Default>

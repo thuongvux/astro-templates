@@ -1,0 +1,21 @@
+---
+import Default from "@layouts/Default.astro";
+try {
+  var posts = await Astro.glob("./**/*.md");
+} catch (error) {}
+---
+
+<Default title="Welcome to my place" class="py-10">
+  <h1>This is from-source's posts</h1>
+  <h2>
+    {
+      posts!.map((e, index) => {
+        return (
+          <li class="list-decimal">
+            <a href={e.url}>{e.frontmatter.title}</a>
+          </li>
+        );
+      })
+    }
+  </h2>
+</Default>

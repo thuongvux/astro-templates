@@ -1,0 +1,110 @@
+@import "./fonts.css";
+@import "./tailwind.css";
+@import "./themes/dark.css";
+@import "./themes/light.css";
+
+:root {
+  --hue: 220;
+  --bg: oklch(97% 0.002 var(--hue));
+  --bg-darker: oklch(95% 0.001 var(--hue));
+  --text: oklch(2% 0.03 var(--hue) / 80%);
+  --text-lighter: oklch(4% 0.03 var(--hue) / 80%);
+  --text-headings: oklch(10% 0.05 var(--hue) / 85%);
+  --link-active: oklch(70% 0.07 var(--hue));
+  --selection-bg: hsl(var(--hue) 60% 75%);
+  --selection-text: white;
+}
+
+* {
+  @apply leading-normal;
+}
+
+html {
+  @apply bg-[--bg] font-sans text-[20px] font-light text-[--text];
+  @apply lg:overflow-x-hidden;
+}
+
+body {
+  @apply relative flex flex-col items-center;
+}
+
+main {
+  @apply w-[clamp(35vw,1200px,100%)];
+}
+
+:is(img, picture, video, canvas, svg) {
+  @apply drag-none h-auto max-w-full bg-cover;
+  vertical-align: middle;
+  shape-margin: 0.75rem;
+}
+
+:is(input, button, textarea, select) {
+  font: inherit;
+}
+
+::selection {
+  @apply bg-[--selection-bg] text-[--selection-text];
+}
+
+:is(h1, h2, h3, h4, h5, h6) {
+  @apply font-subtitle font-extralight text-[--text-headings];
+}
+
+h1 {
+  @apply font-title text-[2rem] font-light;
+}
+
+h2 {
+  @apply text-[1.375rem];
+}
+
+h3 {
+  @apply text-[1.25rem];
+}
+
+h4 {
+  @apply text-[1.125rem];
+}
+
+p {
+  @apply break-words text-[--text];
+  & + p {
+    @apply my-[0.4rem];
+  }
+}
+
+a {
+  @apply drag-none inline-block w-fit indent-0 hover:text-[--link-active];
+}
+
+button {
+  @apply rounded-lg border-2 border-indigo-300 px-2 py-1 text-center;
+}
+
+li {
+  @apply list-none;
+}
+
+form {
+  & label {
+    @apply my-auto;
+  }
+}
+
+input {
+  @apply px-3 py-1 text-sm;
+  @apply rounded-sm border-2 border-gray-200 outline-2 outline-gray-400;
+  &:invalid {
+    @apply bg-red-50 outline-dotted outline-red-500;
+  }
+  &[type="submit"] {
+    @apply cursor-pointer place-self-center;
+  }
+}
+
+/* div:empty {
+  @apply center border-2 border-dashed border-red-500 px-3 py-1;
+  &::after {
+    @apply content-["empty_div"];
+  }
+} */

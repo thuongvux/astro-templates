@@ -1,0 +1,49 @@
+---
+import Markdown from "@layouts/Markdown.astro";
+
+type Props = {
+  url: string;
+};
+const { url }: Props = Astro.props;
+
+const parse = (mdRaw: string) => {
+  const pattern = {
+    frontmatter: /\-{3}(.|\n)*\-{3}/g,
+    key: /(?<!:.*)(\w*)(?=\:)/g,
+    value: /(?<=\").*(?=\")/g,
+  };
+
+  const fMatch = mdRaw.match(pattern.frontmatter);
+  if (!fMatch) {
+    return {
+      frontmatter: {},
+      content: mdRaw,
+    };
+  }
+  const content = mdRaw.replace(fMatch[0], "").trim();
+  const fRaw = fMatch[0].replaceAll("---", "").trim();
+  const fLines = fRaw.match(/.+/g) ?? [""];
+  const fEntries = fLines.map((e) => {
+    const matchKey = e.match(pattern.key);
+    const matchValue = e.match(pattern.value);
+    if (!matchKey || !matchValue) {
+      return [];
+    }
+    return [matchKey[0], matchValue[0]];
+  });
+  const frontmatter = Object.fromEntries(fEntries) as Record<string, string>;
+  return {
+    frontmatter: frontmatter,
+    content: content,
+  };
+};
+
+const res = await fetch(url);
+if (!res.ok) {
+  throw new Error("Failed to fetch");
+}
+const blob = await res.blob();
+const { frontmatter, content } = parse(await blob.text());
+---
+
+<Markdown frontmatter={frontmatter} rawContent={() => content} />

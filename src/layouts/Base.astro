@@ -1,0 +1,27 @@
+---
+type Props = {
+  title?: string;
+  description?: string;
+  class?: string;
+};
+const { title, description, class: className }: Props = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="view-transition" content="same-origin" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <slot name="head" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot name="header" />
+    <main class={className} transition:animate="initial">
+      <slot />
+    </main>
+    <slot name="footer" />
+  </body>
+</html>

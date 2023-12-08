@@ -1,0 +1,30 @@
+---
+import Base from "@layouts/Base.astro";
+import { ViewTransitions } from "astro:transitions";
+import StickyNav from "@components/StickyNav.astro";
+import "./styles/default.css";
+type Props = {
+  title?: string;
+  description?: string;
+  class?: string;
+  options?: {
+    stickyNav?: boolean;
+    viewTransitions?: boolean;
+  };
+};
+const {
+  title,
+  description,
+  class: className,
+  options = { stickyNav: true },
+}: Props = Astro.props;
+---
+
+<Base title={title} description={description} class={className}>
+  {options.viewTransitions && <ViewTransitions slot="head" />}
+  {options.stickyNav != false && <StickyNav slot="header" />}
+  <slot name="head" slot="head" />
+  <slot name="header" slot="header" />
+  <slot name="footer" slot="footer" />
+  <slot />
+</Base>
