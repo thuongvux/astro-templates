@@ -5,8 +5,8 @@ import preact from "@astrojs/preact";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [tailwind(), preact()],
-  adapter: vercel(),
-  output: "hybrid",
-  prefetch: true,
+	integrations: [tailwind(), preact()],
+	adapter: vercel(),
+	output: "hybrid",
+	prefetch: true,
 });
