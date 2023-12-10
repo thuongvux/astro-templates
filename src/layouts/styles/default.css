@@ -77,10 +77,6 @@ a {
   @apply drag-none inline-block w-fit indent-0 hover:text-[--link-active];
 }
 
-button {
-  @apply rounded-lg border-2 border-indigo-300 px-2 py-1 text-center;
-}
-
 li {
   @apply list-none;
 }

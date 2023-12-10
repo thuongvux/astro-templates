@@ -7,14 +7,12 @@ export const cookies = {
 	get: (key: string) => {
 		const value = `; ${document.cookie}`;
 		const parts = value.split(`; ${key}=`);
-
 		if (parts.length === 2) {
 			return parts.pop()?.split(";").shift();
 		}
 	},
 	delete: (key: string) => {
-		const date = new Date();
-		date.setTime(date.getTime() + -1 * 24 * 60 * 60 * 1000);
+		const date = new Date(0);
 		document.cookie = `${key}=; expires=${date.toUTCString()}; path=/`;
 	},
 };
