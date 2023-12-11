@@ -68,4 +68,18 @@ const navItems = [
       }
     }
   }
+  [href="/auth/signout"] {
+    @apply hover:[animation:shake-scale_0.3s_infinite];
+  }
+  @keyframes shake-scale {
+    25% {
+      transform: translate(2px, 1px) rotate(5deg) scale(1.1);
+    }
+    50% {
+      transform: translate(0, 0) rotate(0eg);
+    }
+    75% {
+      transform: translate(1px, 2px) rotate(-5deg) scale(1.1);
+    }
+  }
 </style>
