@@ -4,12 +4,11 @@
     "jsx": "react-jsx",
     "jsxImportSource": "preact",
     "paths": {
-      "#assets/*": ["src/assets/*"],
-      "#backend/*": ["src/backend/*"],
-      "#components/*": ["src/components/*"],
-      "#configs/*": ["src/configs/*"],
-      "#layouts/*": ["src/layouts/*"],
-      "#public/*": ["public/*"]
+      "🎥/*": ["src/assets/*"],
+      "👽/*": ["src/backend/*"],
+      "🧩/*": ["src/components/*"],
+      "⚙️/*": ["src/configs/*"],
+      "🧣/*": ["src/layouts/*"]
     }
   },
   "extends": "astro/tsconfigs/strict"
