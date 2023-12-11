@@ -8,7 +8,7 @@
       "👽/*": ["src/backend/*"],
       "🧩/*": ["src/components/*"],
       "⚙️/*": ["src/configs/*"],
-      "🧣/*": ["src/layouts/*"]
+      "🌈/*": ["src/layouts/*"]
     }
   },
   "extends": "astro/tsconfigs/strict"

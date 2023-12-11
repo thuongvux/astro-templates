@@ -1,5 +1,5 @@
 ---
-layout: "🧣/Markdown.astro"
+layout: "🌈/Markdown.astro"
 authors: "Thuong Vu"
 title: "My VS Code settings"
 cover: "/images/vscode.jpg"

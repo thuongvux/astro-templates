@@ -1,5 +1,5 @@
 ---
-layout: "🧣/Markdown.astro"
+layout: "🌈/Markdown.astro"
 authors: "Frank the Giant Bunny"
 title: "Involutory Property of the Discrete Hartley Transform"
 cover: "https://images.unsplash.com/photo-1527193874670-bf698eaa3d47?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
