@@ -20,16 +20,7 @@ const navItems = [
     <span class="nav-items">
       {
         navItems.map((item) => {
-          return (
-            <a
-              href={item.href}
-              class={
-                Astro.url.pathname === item.href ? "nav-item-active" : null
-              }
-            >
-              {item.title}
-            </a>
-          );
+          return <a href={item.href}>{item.title}</a>;
         })
       }
     </span>
@@ -44,25 +35,20 @@ const navItems = [
     --navbar-link-hover-color: oklch(70% 0.12 var(--hue, 0));
   }
   .sticky-nav {
-    @apply sticky left-0 top-0 z-[100] flex h-[100px] w-screen flex-col items-center justify-end;
+    @apply sticky left-0 top-0 z-[100] h-[100px] w-screen pt-[20px];
     background: linear-gradient(var(--bg, #fff) 60%, transparent 100%);
   }
-
   .navbar {
-    @apply h-[80px] w-[clamp(30vw,1024px,80vw)] rounded-[10px] bg-[--navbar-bg-color] px-12;
-    @apply flex items-center justify-center md:justify-between;
-
-    & * {
-      @apply font-cursive;
-    }
-    & > .nav-home {
-      @apply mx-8 text-[2rem] transition duration-300 hover:scale-110;
+    @apply mx-auto h-[80px] w-[clamp(30vw,1024px,80vw)] rounded-lg bg-[--navbar-bg-color];
+    @apply flex items-center justify-center px-10 font-cursive md:justify-between;
+    & .nav-home {
+      @apply px-6 text-[2rem] transition duration-300 hover:scale-110;
       & a {
         @apply text-[--navbar-home-color];
       }
     }
-    & > .nav-items {
-      @apply hidden flex-row gap-x-6 text-[1.6rem] md:flex;
+    & .nav-items {
+      @apply hidden flex-row gap-6 text-[1.6rem] md:flex;
       & a {
         @apply text-[--navbar-items-color] hover:text-[--navbar-link-hover-color];
       }
