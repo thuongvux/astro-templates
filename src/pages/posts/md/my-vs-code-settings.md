@@ -1,5 +1,5 @@
 ---
-layout: "@layouts/Markdown.astro"
+layout: "#layouts/Markdown.astro"
 authors: "Thuong Vu"
 title: "My VS Code settings"
 cover: "/images/vscode.jpg"

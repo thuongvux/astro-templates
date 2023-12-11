@@ -33,9 +33,10 @@ main {
 }
 
 :is(img, picture, video, canvas, svg) {
-  @apply drag-none h-auto max-w-full bg-cover;
+  @apply h-auto max-w-full bg-cover;
   vertical-align: middle;
   shape-margin: 0.75rem;
+  -webkit-user-drag: none;
 }
 
 :is(input, button, textarea, select) {
@@ -74,7 +75,8 @@ p {
 }
 
 a {
-  @apply drag-none inline-block w-fit indent-0 hover:text-[--link-active];
+  @apply inline-block w-fit indent-0 hover:text-[--link-active];
+  -webkit-user-drag: none;
 }
 
 li {

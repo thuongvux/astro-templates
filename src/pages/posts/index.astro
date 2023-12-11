@@ -1,7 +1,7 @@
 ---
 export const prerender = false;
-import Default from "@layouts/Default.astro";
-import { supabase } from "@backend/supabase/server";
+import Default from "#layouts/Default.astro";
+import { supabase } from "#backend/supabase/server";
 const storage = supabase(Astro.cookies).storage;
 const bucket = storage.from("markdown");
 const { data, error } = await bucket.list();

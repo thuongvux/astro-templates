@@ -1,7 +1,7 @@
 ---
-import Base from "@layouts/Base.astro";
+import Base from "#layouts/Base.astro";
+import StickyNav from "#components/StickyNav.astro";
 import { ViewTransitions } from "astro:transitions";
-import StickyNav from "@components/StickyNav.astro";
 import "./styles/default.css";
 type Props = {
   title?: string;
@@ -28,3 +28,9 @@ const {
   <slot name="footer" slot="footer" />
   <slot />
 </Base>
+
+<script>
+  import { cookies } from "#configs/cookies";
+
+  cookies;
+</script>

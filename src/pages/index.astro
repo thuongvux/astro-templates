@@ -1,21 +1,7 @@
 ---
-import Default from "@layouts/Default.astro";
-try {
-  var routes = await Astro.glob("./*/index.astro");
-} catch (error) {}
+import Default from "#layouts/Default.astro";
 ---
 
 <Default title="Welcome to my place" class="py-10">
   <h1>Hello, {Astro.url.pathname}</h1>
-  <h2>
-    {
-      routes!.map((e, index) => {
-        return (
-          <li>
-            <a href={e.url}>{`${index + 1}. ${e.url}`}</a>
-          </li>
-        );
-      })
-    }
-  </h2>
 </Default>
