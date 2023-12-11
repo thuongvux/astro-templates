@@ -1,7 +1,7 @@
 ---
 export const prerender = false;
-import { supabase } from "👽/supabase/server";
 import MDFetch from "🌈/MDFetch.astro";
+import { supabase } from "👽/supabase/server";
 
 const storage = supabase(Astro.cookies).storage;
 const { data, error } = await storage

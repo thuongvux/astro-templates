@@ -1,15 +1,13 @@
 ---
 import Default from "🌈/Default.astro";
-try {
-  var posts = await Astro.glob("./**/*.md");
-} catch (error) {}
+const blog = await Astro.glob("./**/*.md");
 ---
 
 <Default title="Welcome to my place" class="py-10">
-  <h1>This is from-source's posts</h1>
+  <h1>This is from-source's blog</h1>
   <h2>
     {
-      posts!.map((e, index) => {
+      blog?.map((e) => {
         return (
           <li class="list-decimal">
             <a href={e.url}>{e.frontmatter.title}</a>

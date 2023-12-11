@@ -4,11 +4,11 @@
     "jsx": "react-jsx",
     "jsxImportSource": "preact",
     "paths": {
-      "🎥/*": ["src/assets/*"],
+      "🌈/*": ["src/layouts/*"],
       "👽/*": ["src/backend/*"],
-      "🧩/*": ["src/components/*"],
-      "⚙️/*": ["src/configs/*"],
-      "🌈/*": ["src/layouts/*"]
+      "🧩/*": ["src/configs/*"],
+      "🧊/*": ["src/components/*"],
+      "🪗/*": ["src/assets/*"]
     }
   },
   "extends": "astro/tsconfigs/strict"

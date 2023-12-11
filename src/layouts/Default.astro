@@ -1,6 +1,6 @@
 ---
 import Base from "🌈/Base.astro";
-import StickyNav from "🧩/StickyNav.astro";
+import StickyNav from "🧊/StickyNav.astro";
 import { ViewTransitions } from "astro:transitions";
 import "./styles/default.css";
 type Props = {
@@ -28,9 +28,3 @@ const {
   <slot name="footer" slot="footer" />
   <slot />
 </Base>
-
-<script>
-  import { cookies } from "⚙️/cookies";
-
-  cookies;
-</script>
