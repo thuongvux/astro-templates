@@ -1,12 +1,12 @@
 ---
-layout: "🌈/Markdown.astro"
+layout: "🧊/Markdown.astro"
 authors: "Frank the Giant Bunny"
 title: "Involutory Property of the Discrete Hartley Transform"
 cover: "https://images.unsplash.com/photo-1527193874670-bf698eaa3d47?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 releaseDate: "2023-11-16"
 ---
 
-Given a column vector $x\in\mathbb{R}^n$, its _Discrete Hartley Transform_
+Given a column vector $x\in\mathbb{R}^n$, its [Discrete Hartley Transform](https://en.wikipedia.org/wiki/Discrete_Hartley_transform)
 (DHT) is defined as another vector $y\in\mathbb{R}^n$ such that
 
 $$
@@ -74,28 +74,14 @@ $$
 $$
 \begin{alignat}{2}
   \mathrm{cas}\alpha\mathrm{cas}\beta
-  &=
-  \sqrt{2}\cos\left(\alpha - \frac{\pi}{4}\right)
-  \cdot
-  \sqrt{2}\cos\left(\beta - \frac{\pi}{4}\right)
-  &
-  \quad\quad\text{by }
-  \\
-  &=
-  \cos\left(\alpha + \beta - {\frac \pi 2}\right)
-  +
-  \cos(\alpha - \beta)
-  &
-  \quad\quad
-  2\cos\theta\cos\phi
-  =
-  \cos(\theta+\phi) + \cos(\theta-\phi)
-  \\
-  &=
-  \sin(\alpha + \beta) + \cos(\alpha - \beta)
-  &
-  \quad\quad
-  \cos\left(\theta-\frac{\pi}{2}\right) = \sin\theta
+  &=\sqrt{2}\cos\left(\alpha - \frac{\pi}{4}\right)
+  \cdot\sqrt{2}\cos\left(\beta - \frac{\pi}{4}\right)
+  &\quad\quad\text{by }\\
+  &=\cos\left(\alpha + \beta - {\frac \pi 2}\right)
+  +\cos(\alpha - \beta)&\quad\quad2\cos\theta\cos\phi
+  =\cos(\theta+\phi) + \cos(\theta-\phi)\\
+  &=\sin(\alpha + \beta) + \cos(\alpha - \beta)
+  &\quad\quad\cos\left(\theta-\frac{\pi}{2}\right) = \sin\theta
 \end{alignat}
 $$
 
@@ -108,10 +94,8 @@ The target equality is decomposed into two summations by
 $$
 \sum_{j=0}^{n-1}
   \mathrm{cas}\left(\tfrac{2\pi}{n}ij\right) \mathrm{cas}\left(\tfrac{2\pi}{n}i'j\right)
-  =
-  \sum_{j=0}^{n-1} \sin\left(\tfrac{2\pi}{n}(i+i')j\right)
-  +
-  \sum_{j=0}^{n-1} \cos\left(\tfrac{2\pi}{n}(i-i')j\right)
+  =\sum_{j=0}^{n-1} \sin\left(\tfrac{2\pi}{n}(i+i')j\right)
+  +\sum_{j=0}^{n-1} \cos\left(\tfrac{2\pi}{n}(i-i')j\right)
 $$
 
 The above will be interpreted as the real and imaginary parts in
@@ -120,10 +104,8 @@ geometric progressions of complex numbers:
 $$
 \sum_{j=0}^{n-1}
   \mathrm{cas}\left(\tfrac{2\pi}{n}ij\right) \mathrm{cas}\left(\tfrac{2\pi}{n}i'j\right)
-  =
-  \Im\left\{\sum_{j=0}^{n-1} \omega^{(i+i')j} \right\}
-  +
-  \Re\left\{\sum_{j=0}^{n-1} \omega^{(i-i')j} \right\}
+  =\Im\left\{\sum_{j=0}^{n-1} \omega^{(i+i')j} \right\}
+  +\Re\left\{\sum_{j=0}^{n-1} \omega^{(i-i')j} \right\}
 $$
 
 where $\omega$ is the _primitive_ $n^{\mathrm{th}}$ root of unity $\omega=\exp(\iota 2\pi/n) = \cos(2\pi/n) + \iota\sin(2\pi/n)$.
@@ -138,8 +120,8 @@ $$
 \text{For an integer $k$,}\quad
 \sum_{j=0}^{n-1}(\omega^k)^j =
 \begin{cases}
-    n, & \text{if $k$ is a multiple of $n$;} \\
-    0, & \text{otherwise.}
+  n, &\text{if $k$ is a multiple of $n$;} \\
+  0, &\text{otherwise.}
 \end{cases}
 $$
 

@@ -19,7 +19,11 @@ const { title, description, class: className }: Props = Astro.props;
   </head>
   <body>
     <slot name="header" />
-    <main class={className} transition:animate="initial">
+    <main
+      class={className}
+      data-href={Astro.url.href}
+      transition:animate="initial"
+    >
       <slot />
     </main>
     <slot name="footer" />

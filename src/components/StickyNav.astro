@@ -1,4 +1,5 @@
 ---
+import { AuthEmoji } from "🧩/AuthEmoji";
 type Props = {
   id?: string;
 };
@@ -8,7 +9,6 @@ const navItems = [
   { href: "/blog", title: "Blog" },
   { href: "/projects", title: "Projects" },
   { href: "/examples", title: "Examples" },
-  { href: "/auth/signout", title: "🥶" },
 ];
 ---
 
@@ -23,6 +23,7 @@ const navItems = [
           return <a href={item.href}>{item.title}</a>;
         })
       }
+      <AuthEmoji client:load />
     </span>
   </div>
 </div>
@@ -37,6 +38,9 @@ const navItems = [
   .sticky-nav {
     @apply sticky left-0 top-0 z-[100] h-[100px] w-screen pt-[20px];
     background: linear-gradient(var(--bg, #fff) 60%, transparent 100%);
+    & a {
+      @apply before:content-none;
+    }
   }
   .navbar {
     @apply mx-auto h-[80px] w-[clamp(30vw,1024px,80vw)] rounded-lg bg-[--navbar-bg-color];
@@ -48,21 +52,23 @@ const navItems = [
       }
     }
     & .nav-items {
-      @apply hidden flex-row gap-6 text-[1.6rem] md:flex;
+      @apply hidden flex-row items-center gap-6 text-[1.6rem] md:flex;
       & a {
         @apply text-[--navbar-items-color] hover:text-[--navbar-link-hover-color];
       }
     }
   }
-  [href*="auth"] {
-    @apply hover:animate-[shake_500ms_infinite];
+  /* https://docs.astro.build/en/guides/styling/#global-styles */
+  :global(.auth-emoji) {
+    @apply aspect-square w-[40px] overflow-hidden rounded-full center;
+    @apply before:!content-none hover:animate-[shake_500ms_infinite];
   }
   @keyframes shake {
     25% {
       transform: translate(2px, 1px) rotate(5deg) scale(1.1);
     }
     50% {
-      transform: translate(0, 0) rotate(0eg);
+      transform: translate(0, 0) rotate(0eg) scale(1);
     }
     75% {
       transform: translate(1px, 2px) rotate(-5deg) scale(1.1);

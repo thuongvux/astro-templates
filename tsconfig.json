@@ -4,10 +4,10 @@
     "jsx": "react-jsx",
     "jsxImportSource": "preact",
     "paths": {
-      "🌈/*": ["src/layouts/*"],
       "👽/*": ["src/backend/*"],
-      "🧩/*": ["src/configs/*"],
-      "🧊/*": ["src/components/*"],
+      "📦/*": ["src/configs/*"],
+      "🧊/*": ["src/layouts/*"],
+      "🧩/*": ["src/components/*"],
       "🪗/*": ["src/assets/*"]
     }
   },

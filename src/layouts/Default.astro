@@ -1,12 +1,13 @@
 ---
-import Base from "🌈/Base.astro";
-import StickyNav from "🧊/StickyNav.astro";
+import Base from "🧊/Base.astro";
+import StickyNav from "🧩/StickyNav.astro";
 import { ViewTransitions } from "astro:transitions";
 import "./styles/default.css";
 type Props = {
   title?: string;
   description?: string;
   class?: string;
+  href?: string;
   options?: {
     stickyNav?: boolean;
     viewTransitions?: boolean;
@@ -16,13 +17,13 @@ const {
   title,
   description,
   class: className,
-  options = { stickyNav: true },
+  options = { stickyNav: true, viewTransitions: true },
 }: Props = Astro.props;
 ---
 
 <Base title={title} description={description} class={className}>
   {options.viewTransitions && <ViewTransitions slot="head" />}
-  {options.stickyNav != false && <StickyNav slot="header" />}
+  {options.stickyNav && <StickyNav slot="header" />}
   <slot name="head" slot="head" />
   <slot name="header" slot="header" />
   <slot name="footer" slot="footer" />

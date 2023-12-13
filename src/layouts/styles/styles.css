@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .markdown {
+    /* --hue: 350; */
+    --text-title: oklch(10% 0.05 var(--hue) / 85%);
+    --text-headings: oklch(30% 0.24 var(--hue) / 70%);
+    --text-list-item: oklch(45% 0.2 var(--hue) / 75%);
+    @apply my-4 rounded-lg bg-[--bg-darker] px-4 py-6 text-sm md:text-[1rem];
+
+    & .cover {
+      @apply aspect-[3.14] w-full rounded-xl;
+    }
+    & .title {
+      @apply mb-8 mt-6 w-full px-4;
+      @apply text-center indent-0 font-title text-[1.7em] leading-8 text-[--text-title];
+      text-wrap: balance;
+    }
+    & .authors * {
+      @apply mt-12 font-describe text-xl font-medium text-gray-600/60;
+      & span {
+        @apply bg-gradient-to-r from-[hsl(calc(var(--hue)-30)_70%_60%)] to-[hsl(calc(var(--hue)+30)_70%_60%)] bg-clip-text text-transparent;
+      }
+    }
+    & :is(h1, h2, h3) {
+      @apply font-sans font-medium text-[--text-headings];
+    }
+    & h1 {
+      @apply text-[1.5em];
+    }
+    & h2 {
+      @apply text-[1.25em];
+    }
+    & h3 {
+      @apply text-[1.125em];
+    }
+    & p {
+      @apply indent-6;
+      & a {
+        @apply text-blue-700 underline decoration-1 underline-offset-[3px];
+      }
+    }
+    & :is(ol, ul, blockquote) p {
+      @apply indent-0;
+    }
+    & strong {
+      @apply font-medium;
+    }
+    & img {
+      @apply my-6 aspect-[22/9] w-full rounded-xl object-cover;
+    }
+    & code pre {
+      @apply mx-auto my-2 w-[min(768px,100%)] rounded-lg px-4 py-2 font-mono text-[13px] md:text-[15px];
+      @apply drop-shadow-lg;
+    }
+    & ol > li {
+      @apply ml-6 list-decimal;
+      &::marker {
+        @apply font-medium text-[--text-list-item];
+      }
+    }
+    & ul > li {
+      @apply ml-6 list-["🔹"];
+    }
+    & li + li {
+      @apply my-2;
+    }
+    & blockquote {
+      @apply my-2 rounded-r-lg border-l-[0.25rem] border-[hsl(var(--hue)_40%_50%)] bg-[--bg-darker] py-1 pl-4;
+      & > p {
+        @apply text-[0.9rem];
+      }
+    }
+  }
+
+  .highlighter {
+    --value: 0;
+    --highlights-bg-a: hsl(200 80% 80%);
+    --highlights-bg-i: hsl(100 80% 80%);
+    --highlights-bg-b: hsl(0 80% 80%);
+    --highlights-height: 100%;
+    & p:has(a, i, b, em, strong) {
+      animation: increaseValue both;
+      animation-timeline: view();
+      animation-range: 0% 30%;
+      /* & > a {
+        @apply duration-1000 hover:animate-[shake_1000ms] hover:text-[--text-color];
+        background: linear-gradient(
+            120deg,
+            var(--highlights-bg-a) 50%,
+            transparent 50%
+          )
+          0% / 200% var(--highlights-height) no-repeat;
+        background-position: calc((1 - var(--value)) * 120%) 50%;
+      } */
+      & > :is(i, em) {
+        @apply italic duration-1000 hover:animate-[shake_1000ms];
+        background: linear-gradient(
+            120deg,
+            var(--highlights-bg-i) 50%,
+            transparent 50%
+          )
+          0% / 200% var(--highlights-height) no-repeat;
+        background-position: calc((1 - var(--value)) * 120%) 50%;
+      }
+      & > :is(b, strong) {
+        @apply font-light duration-1000 hover:animate-[shake_1000ms];
+        background: linear-gradient(
+            120deg,
+            var(--highlights-bg-b) 50%,
+            transparent 50%
+          )
+          0% / 200% var(--highlights-height) no-repeat;
+        background-position: calc((1 - var(--value)) * 120%) 50%;
+      }
+    }
+    @keyframes increaseValue {
+      from {
+        --value: 0;
+      }
+      to {
+        --value: 1;
+      }
+    }
+  }
+
+  /* Highlight on hover */
+  :is(.hover-highlight, .hoh) {
+    --highlight-color: hsl(70 60% 78%);
+    @apply relative;
+    &::before {
+      @apply absolute inset-0 z-[-1] inline-block rounded-[0.5em] bg-[--highlight-color] content-[""];
+      @apply transition-transform;
+      @apply origin-bottom-right scale-x-0 duration-500;
+    }
+    &:hover::before {
+      @apply origin-bottom-left scale-x-100 duration-1000;
+    }
+  }
+
+  .flip-box {
+    --loading-box-width: clamp(80px, min(10vw, 10vh), 200px);
+    @apply fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
+    perspective: calc(var(--loading-box-width) * 3);
+    & .box {
+      @apply aspect-square w-[--loading-box-width] bg-green-500;
+      animation: skeleton-flip 1s infinite;
+    }
+    @keyframes skeleton-flip {
+      50% {
+        transform: rotateY(180deg);
+      }
+      100% {
+        transform: rotateY(180deg) rotateX(180deg);
+      }
+    }
+  }
+}

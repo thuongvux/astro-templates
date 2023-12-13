@@ -1,5 +1,5 @@
 ---
-layout: "🌈/Markdown.astro"
+layout: "🧊/Markdown.astro"
 authors: "Thuong Vu, Flash"
 title: "Astro, Marked & KaTeX - Perfect docs"
 cover: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/LaTeX_project_logo_bird.svg/1200px-LaTeX_project_logo_bird.svg.png"

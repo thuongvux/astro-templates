@@ -1,5 +1,5 @@
 ---
-import { markedParse } from "🧩/marked";
+import { parse } from "📦/markdown";
 
 type Props = {
   id?: string;
@@ -8,7 +8,7 @@ type Props = {
 };
 const { id, class: className, raw }: Props = Astro.props;
 
-const html = markedParse(raw);
+const html = parse(raw);
 ---
 
 <article id={id} class={className} set:html={html} />

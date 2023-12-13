@@ -1,8 +1,12 @@
 export const cookies = {
-	set: (key: string, value: string, expiresIn?: number) => {
-		const date = new Date();
-		date.setTime(date.getTime() + (expiresIn ?? 7 * 24 * 3600) * 1000);
-		document.cookie = `${key}=${value}; expires=${date.toUTCString()}"; path=/`;
+	set: (key: string, value: string | undefined, expiresIn?: number) => {
+		if (!value) {
+			return false;
+		}
+		const now = new Date().getTime();
+		const expires = new Date(now + (expiresIn ?? 604800) * 1000).toUTCString();
+		document.cookie = `${key}=${value}; expires=${expires}"; path=/`;
+		return true;
 	},
 	get: (key: string) => {
 		const value = `; ${document.cookie}`;
@@ -12,7 +16,14 @@ export const cookies = {
 		}
 	},
 	delete: (key: string) => {
-		const date = new Date(0);
-		document.cookie = `${key}=; expires=${date.toUTCString()}; path=/`;
+		const expired = new Date(0).toUTCString();
+		document.cookie = `${key}=; expires=${expired}; path=/`;
+	},
+	clear: () => {
+		const items = document.cookie.split(";");
+		const expired = new Date(0).toUTCString();
+		for (let i = 0; i < items.length; i++) {
+			document.cookie = `${items[i]}=; expires=${expired}; path=/`;
+		}
 	},
 };

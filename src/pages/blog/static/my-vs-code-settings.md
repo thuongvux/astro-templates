@@ -1,8 +1,8 @@
 ---
-layout: "🌈/Markdown.astro"
+layout: "🧊/Markdown.astro"
 authors: "Thuong Vu"
 title: "My VS Code settings"
-cover: "/images/vscode.jpg"
+cover: "https://cdn.ttgtmedia.com/rms/onlineimages/code_g1019737194.jpg"
 releaseDate: "2023-11-01"
 ---
 
@@ -12,10 +12,21 @@ releaseDate: "2023-11-01"
   "[astro]": {
     "editor.defaultFormatter": "astro-build.astro-vscode"
   },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.wordWrap": "on"
   },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  },
+  "[tailwindcss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "biome.requireConfiguration": false,
+  "editor.defaultFormatter": "biomejs.biome",
   "editor.fontFamily": "'JetBrains Mono', Consolas, monospace",
   "editor.fontLigatures": true,
   "editor.fontSize": 16,
@@ -33,7 +44,7 @@ releaseDate: "2023-11-01"
     "*.css": "tailwindcss"
   },
   "files.exclude": {
-    // "**/.git": false,
+    "**/.git": false,
     ".astro/": true,
     "bun.lockb": true,
     "package-lock.json": true,
@@ -44,10 +55,11 @@ releaseDate: "2023-11-01"
   "git.enableSmartCommit": true,
   "javascript.updateImportsOnFileMove.enabled": "always",
   "markdown.occurrencesHighlight.enabled": true,
-  "prettier.printWidth": 100,
+  "material-icon-theme.folders.color": "#26a67a",
+  "prettier.printWidth": 120,
+  "security.workspace.trust.untrustedFiles": "open",
   "tailwindCSS.classAttributes": ["class", "className", "class:list"],
-  "tailwindCSS.emmetCompletions": true,
-  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
   "terminal.integrated.fontSize": 15,
   "typescript.updateImportsOnFileMove.enabled": "always",
   "window.commandCenter": false,

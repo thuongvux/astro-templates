@@ -14,7 +14,12 @@ export default {
 				".container-queries": {
 					"container-type": "inline-size",
 				},
-				".scrollbar-none": {
+				".center": {
+					display: "flex",
+					"justify-content": "center",
+					"align-items": "center",
+				},
+				".hide-scrollbar": {
 					"-ms-overflow-style": "none",
 					"scrollbar-width": "none",
 					"&::-webkit-scrollbar": {
@@ -39,9 +44,9 @@ export default {
 			serif: ["Lora", "Times New Roman", "serif"],
 			cursive: ["Flavors", "cursive"],
 			mono: ["JetBrains Mono", "Fira Code", "Consolas", "ui-monospace"],
-			title: ["Playpen Sans", "sans-serif"],
+			title: ["Overpass", "sans-serif"],
 			subtitle: ["Playpen Sans", "sans-serif"],
-			describe: ["Roboto", "sans-serif"],
+			describe: ["Dosis", "sans-serif"],
 		},
 		extend: {
 			fontSize: {
