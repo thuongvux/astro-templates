@@ -146,9 +146,9 @@
     perspective: calc(var(--loading-box-width) * 3);
     & .box {
       @apply aspect-square w-[--loading-box-width] bg-green-500;
-      animation: skeleton-flip 1s infinite;
+      animation: flip 1s infinite;
     }
-    @keyframes skeleton-flip {
+    @keyframes flip {
       50% {
         transform: rotateY(180deg);
       }

@@ -4,19 +4,19 @@ import Suspense from "🧩/Suspense";
 import type { FileObject } from "@supabase/storage-js";
 
 export default function BlogList() {
-	const [loaded, setLoaded] = useState(false);
+	const [loading, setLoading] = useState(true);
 	const [blogs, setBlogs] = useState<FileObject[] | null>([]);
 	const getBlogs = async () => {
 		const { data, error } = await supabase.storage.from("blog").list();
 		setBlogs(data);
-		setLoaded(true);
+		setLoading(false);
 	};
 	useEffect(() => {
 		getBlogs();
 	}, []);
 
 	return (
-		<Suspense loaded={loaded}>
+		<Suspense loading={loading}>
 			<h2>This is from-cloud's blog</h2>
 			{blogs?.map((e) => {
 				if (e.name === ".emptyFolderPlaceholder") {

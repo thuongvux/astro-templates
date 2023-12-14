@@ -4,8 +4,8 @@ import { MDFetch, parse } from "📦/markdown";
 import Suspense from "🧩/Suspense";
 
 export default function Blog() {
+	const [loading, setLoading] = useState(true);
 	const [fm, setFm] = useState<Record<string, string> | undefined>();
-	const [loaded, setLoaded] = useState(false);
 
 	const getBlog = async () => {
 		const params = new URL(window.location.href).searchParams;
@@ -24,7 +24,7 @@ export default function Blog() {
 		const html = await parse(content);
 		const blogContent = document.querySelector(".blog-content") as HTMLElement;
 		blogContent.innerHTML = html;
-		setLoaded(true);
+		setLoading(false);
 	};
 
 	useEffect(() => {
@@ -32,7 +32,7 @@ export default function Blog() {
 	}, []);
 
 	return (
-		<Suspense loaded={loaded}>
+		<Suspense loading={loading}>
 			<div className="markdown highlighter">
 				<img src={fm?.cover} alt="" class="cover" />
 				<p class="title">{fm?.title}</p>

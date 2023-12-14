@@ -1,18 +1,17 @@
 import type { ComponentChildren, VNode } from "preact";
 
 type Props = {
-	loaded: boolean;
+	loading: boolean;
+	error?: boolean;
 	skeleton?: VNode | VNode[];
 	children?: ComponentChildren;
 };
 
 export default function Suspense(props: Props) {
 	return (
-		<div class="suspense">
-			{!props.loaded && (props.skeleton ?? <FlipBox />)}
-			<div className={props.loaded ? "visible" : "invisible"}>
-				{props.children}
-			</div>
+		<div className="suspense">
+			{props.loading && (props.skeleton ?? <FlipBox />)}
+			<div hidden={props.loading || props.error}>{props.children}</div>
 		</div>
 	);
 }
