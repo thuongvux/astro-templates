@@ -9,17 +9,15 @@
     --text-headings: oklch(30% 0.24 var(--hue) / 70%);
     --text-list-item: oklch(45% 0.2 var(--hue) / 75%);
     @apply my-4 rounded-lg bg-[--bg-darker] px-4 py-6 text-sm md:text-[1rem];
-
     & .cover {
       @apply aspect-[3.14] w-full rounded-xl;
     }
     & .title {
       @apply mb-8 mt-6 w-full px-4;
-      @apply text-center indent-0 font-title text-[1.7em] leading-8 text-[--text-title];
-      text-wrap: balance;
+      @apply text-pretty text-center indent-0 font-title text-[1.7em] text-[--text-title];
     }
     & .authors {
-      @apply mt-12 text-xl font-medium text-gray-400;
+      @apply mr-6 mt-12 text-right text-xl font-medium text-gray-400;
       & span {
         @apply bg-gradient-to-r from-[hsl(calc(var(--hue)-30)_70%_60%)] to-[hsl(calc(var(--hue)+30)_70%_60%)] bg-clip-text text-transparent;
       }
