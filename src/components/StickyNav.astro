@@ -13,7 +13,7 @@ const navItems = [
 ---
 
 <div id={id} class="sticky-nav">
-  <div class="navbar">
+  <nav>
     <span class="nav-home">
       <a href="/">HOME</a>
     </span>
@@ -25,7 +25,7 @@ const navItems = [
       }
       <AuthEmoji client:load />
     </span>
-  </div>
+  </nav>
 </div>
 
 <style>
@@ -42,7 +42,7 @@ const navItems = [
       @apply before:content-none;
     }
   }
-  .navbar {
+  nav {
     @apply mx-auto h-[80px] w-[clamp(30vw,1024px,80vw)] rounded-lg bg-[--navbar-bg-color];
     @apply flex items-center justify-center px-10 font-cursive md:justify-between;
     & .nav-home {
