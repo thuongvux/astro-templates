@@ -20,10 +20,6 @@
   --selection-text: white;
 }
 
-* {
-  @apply leading-normal;
-}
-
 html {
   @apply bg-[--bg] font-sans text-[20px] font-light text-[--text];
   @apply lg:overflow-x-hidden;
@@ -103,10 +99,3 @@ input {
     @apply cursor-pointer place-self-center;
   }
 }
-
-/* div:empty {
-  @apply center border-2 border-dashed border-red-500 px-3 py-1;
-  &::after {
-    @apply content-["empty_div"];
-  }
-} */

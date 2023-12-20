@@ -17,11 +17,9 @@ const {
   {cover && <img src={cover} alt="" class="cover" />}
   <p class="title">{title}</p>
   <Marked raw={rawContent()} />
-  <div class="authors">
-    <p>
-      {authors.includes(",") ? "Authors" : "Author"}: <span>{authors}</span>
-    </p>
-  </div>
+  <p class="authors">
+    {authors.includes(",") ? "Authors" : "Author"}: <span>{authors}</span>
+  </p>
 </Default>
 
 <script>

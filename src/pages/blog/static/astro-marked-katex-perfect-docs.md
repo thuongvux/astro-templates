@@ -57,7 +57,7 @@ releaseDate: "2023-11-01"
    - Prove that such a linear transformation is 1-1, and $T^{-1}$ is
      norm preserving (and inner product preserving).
 
-8. If $T:\R^m\longrightarrow\R^n$ is a linear transformation, show that there is a
+8. If $T:\R^m\longrightarrow\R^n$ is a linear **transformation**, show that there is a
    number $M$ such that $|T(h)|\leq M|h|$ for all $h\in\R^m$. \
    Hint: Estimate $|T(h)|$ in terms of $|h|$ and the entries in the matrix for $T$.
 

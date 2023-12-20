@@ -18,8 +18,8 @@
       @apply text-center indent-0 font-title text-[1.7em] leading-8 text-[--text-title];
       text-wrap: balance;
     }
-    & .authors * {
-      @apply mt-12 font-describe text-xl font-medium text-gray-600/60;
+    & .authors {
+      @apply mt-12 text-xl font-medium text-gray-400;
       & span {
         @apply bg-gradient-to-r from-[hsl(calc(var(--hue)-30)_70%_60%)] to-[hsl(calc(var(--hue)+30)_70%_60%)] bg-clip-text text-transparent;
       }
@@ -56,16 +56,13 @@
       @apply drop-shadow-lg;
     }
     & ol > li {
-      @apply ml-6 list-decimal;
+      @apply my-2 ml-6 list-decimal;
       &::marker {
         @apply font-medium text-[--text-list-item];
       }
     }
     & ul > li {
-      @apply ml-6 list-["🔹"];
-    }
-    & li + li {
-      @apply my-2;
+      @apply my-1 ml-6 list-["🔹"];
     }
     & blockquote {
       @apply my-2 rounded-r-lg border-l-[0.25rem] border-[hsl(var(--hue)_40%_50%)] bg-[--bg-darker] py-1 pl-4;
@@ -77,44 +74,23 @@
 
   .highlighter {
     --value: 0;
-    --highlights-bg-a: hsl(200 80% 80%);
-    --highlights-bg-i: hsl(100 80% 80%);
-    --highlights-bg-b: hsl(0 80% 80%);
-    --highlights-height: 100%;
-    & p:has(a, i, b, em, strong) {
+    --height: 100%;
+    --bg: hsl(200 80% 80%);
+    & :is(b, strong) {
+      --bg: hsl(45 80% 80%);
+    }
+    & p:has(i, b, em, strong) {
       animation: increaseValue both;
       animation-timeline: view();
       animation-range: 0% 30%;
-      /* & > a {
-        @apply duration-1000 hover:animate-[shake_1000ms] hover:text-[--text-color];
-        background: linear-gradient(
-            120deg,
-            var(--highlights-bg-a) 50%,
-            transparent 50%
-          )
-          0% / 200% var(--highlights-height) no-repeat;
-        background-position: calc((1 - var(--value)) * 120%) 50%;
-      } */
-      & > :is(i, em) {
-        @apply italic duration-1000 hover:animate-[shake_1000ms];
-        background: linear-gradient(
-            120deg,
-            var(--highlights-bg-i) 50%,
-            transparent 50%
-          )
-          0% / 200% var(--highlights-height) no-repeat;
-        background-position: calc((1 - var(--value)) * 120%) 50%;
-      }
-      & > :is(b, strong) {
-        @apply font-light duration-1000 hover:animate-[shake_1000ms];
-        background: linear-gradient(
-            120deg,
-            var(--highlights-bg-b) 50%,
-            transparent 50%
-          )
-          0% / 200% var(--highlights-height) no-repeat;
-        background-position: calc((1 - var(--value)) * 120%) 50%;
-      }
+    }
+    & :is(i, b, em, strong) {
+      overflow: hidden;
+      border-radius: 0.15em;
+      transition-duration: 1s;
+      background: linear-gradient(90deg, var(--bg) 50%, transparent 50%) 0% /
+        200% var(--height) no-repeat;
+      background-position: calc((1 - var(--value)) * 120%) 0px;
     }
     @keyframes increaseValue {
       from {
