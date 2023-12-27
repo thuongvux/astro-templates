@@ -11,11 +11,7 @@ export const AuthEmoji = () => {
 
 	return (
 		<a class="auth-emoji" href={"/auth/signout"}>
-			{avatarUrl ? (
-				<img src={avatarUrl} alt="" className="object-cover" />
-			) : (
-				<span>{emoji}</span>
-			)}
+			{avatarUrl ? <img src={avatarUrl} alt="" className="object-cover" /> : <span>{emoji}</span>}
 		</a>
 	);
 };

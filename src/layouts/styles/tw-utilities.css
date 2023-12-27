@@ -1,0 +1,9 @@
+@tailwind utilities;
+
+@layer utilities {
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

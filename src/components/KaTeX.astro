@@ -44,7 +44,7 @@ const { id, class: className } = Astro.props;
   crossorigin="anonymous"></script>
 
 <!-- Prefetch KaTeX fonts to prevent FOUT or FOIT -->
-<script type="text/javascript">
+<script is:inline>
   document.addEventListener("DOMContentLoaded", () => {
     renderMathInElement(document.body, {
       // customised options

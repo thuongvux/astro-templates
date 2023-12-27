@@ -1,0 +1,48 @@
+---
+import { type Provider } from "@supabase/supabase-js";
+type Props = {
+  provider: Provider;
+  id?: string;
+  class?: string;
+};
+
+const { provider, id, class: className }: Props = Astro.props;
+---
+
+<button id={id} class:list={["signin-oauth", className]} data-provider={provider}>
+  <img src={`/images/${provider}.png`} alt="" />
+  <p>
+    Sign in with <span class="capitalize">{provider}</span>
+  </p>
+</button>
+
+<script>
+  import { type Provider } from "@supabase/supabase-js";
+  import { supabase } from "👽/supabase/client";
+  const oauths = document.querySelectorAll(".signin-oauth") as NodeListOf<HTMLElement>;
+  oauths?.forEach((item) => {
+    const provider = item.dataset.provider as Provider;
+    item.addEventListener("click", async (e) => {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: provider,
+        options: {
+          redirectTo: `${window.location.origin}/auth`,
+        },
+      });
+    });
+  });
+</script>
+
+<style>
+  button {
+    @apply rounded-md px-2 py-1;
+    @apply flex w-fit min-w-fit items-center justify-center border-indigo-200 bg-indigo-100 font-normal duration-300;
+    @apply hover:scale-105 hover:border-indigo-400 hover:bg-indigo-100 hover:drop-shadow-lg;
+    img {
+      @apply mx-2 h-[1.5em] grayscale;
+    }
+    &:hover img {
+      @apply grayscale-0 duration-300;
+    }
+  }
+</style>

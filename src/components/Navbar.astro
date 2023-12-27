@@ -1,5 +1,5 @@
 ---
-import { AuthEmoji } from "🧩/AuthEmoji";
+import { AuthEmoji } from "./AuthEmoji";
 type Props = {
   id?: string;
 };
@@ -8,11 +8,11 @@ const { id } = Astro.props;
 const navItems = [
   { href: "/blog", title: "Blog" },
   { href: "/projects", title: "Projects" },
-  { href: "/examples", title: "Examples" },
+  { href: "/demo", title: "Demo" },
 ];
 ---
 
-<div id={id} class="sticky-nav">
+<section id={id} class="navbar-wrapper">
   <nav>
     <span class="nav-home">
       <a href="/">HOME</a>
@@ -20,48 +20,43 @@ const navItems = [
     <span class="nav-items">
       {
         navItems.map((item) => {
-          return <a href={item.href}>{item.title}</a>;
+          return (
+            <a class="hover:brightness-75" href={item.href}>
+              {item.title}
+            </a>
+          );
         })
       }
       <AuthEmoji client:load />
     </span>
   </nav>
-</div>
+</section>
 
 <style>
-  :root {
+  section {
     --navbar-bg-color: oklch(90% 0.025 var(--hue, 0));
-    --navbar-home-color: oklch(50% 0.15 var(--hue, 0));
     --navbar-items-color: oklch(60% 0.17 var(--hue, 0));
-    --navbar-link-hover-color: oklch(70% 0.12 var(--hue, 0));
-  }
-  .sticky-nav {
-    @apply sticky left-0 top-0 z-[100] h-[100px] w-screen pt-[20px];
+    @apply sticky left-0 top-0 z-[100] w-screen pt-[20px];
     background: linear-gradient(var(--bg, #fff) 60%, transparent 100%);
-    & a {
-      @apply before:content-none;
+    a {
+      @apply before:hidden;
     }
   }
   nav {
-    @apply mx-auto h-[80px] w-[clamp(30vw,1024px,80vw)] rounded-lg bg-[--navbar-bg-color];
+    @apply mx-auto h-[60px] w-[clamp(30vw,864px,80vw)] rounded-full;
     @apply flex items-center justify-center px-10 font-cursive md:justify-between;
-    & .nav-home {
-      @apply px-6 text-[2rem] transition duration-300 hover:scale-110;
-      & a {
-        @apply text-[--navbar-home-color];
-      }
+    @apply bg-[--navbar-bg-color] text-[--navbar-items-color];
+    .nav-home {
+      @apply text-3xl font-normal transition duration-300 hover:scale-110;
     }
-    & .nav-items {
-      @apply hidden flex-row items-center gap-6 text-[1.6rem] md:flex;
-      & a {
-        @apply text-[--navbar-items-color] hover:text-[--navbar-link-hover-color];
-      }
+    .nav-items {
+      @apply hidden flex-row items-center gap-4 text-2xl md:flex;
     }
   }
   /* https://docs.astro.build/en/guides/styling/#global-styles */
   :global(.auth-emoji) {
-    @apply aspect-square w-[40px] overflow-hidden rounded-full center;
-    @apply before:!content-none hover:animate-[shake_500ms_infinite];
+    @apply aspect-square w-[40px] overflow-hidden rounded-full text-[32px] center;
+    @apply before:!hidden hover:animate-[shake_500ms_infinite];
   }
   @keyframes shake {
     25% {

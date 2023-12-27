@@ -10,9 +10,7 @@ export default function Blog() {
 	const getBlog = async () => {
 		const params = new URL(window.location.href).searchParams;
 		const path = `${params.get("q")?.replaceAll("_", ".")}`;
-		const { data } = await supabase.storage
-			.from("blog")
-			.createSignedUrl(path, 60);
+		const { data } = await supabase.storage.from("blog").createSignedUrl(path, 60);
 		const url = data?.signedUrl;
 		if (!url) {
 			alert("Your blog is not found!");
@@ -30,19 +28,16 @@ export default function Blog() {
 	useEffect(() => {
 		getBlog();
 	}, []);
-
 	return (
 		<Suspense loading={loading}>
-			<div className="markdown highlighter">
-				<img src={fm?.cover} alt="" class="cover" />
-				<p class="title">{fm?.title}</p>
-				<div className="blog-content" />
-				<div class="authors">
-					<p>
-						{fm?.authors.includes(",") ? "Authors: " : "Author: "}
-						<span>{fm?.authors}</span>
-					</p>
-				</div>
+			<img src={fm?.cover} alt="" class="cover" />
+			<p class="title">{fm?.title}</p>
+			<div className="blog-content" />
+			<div class="authors">
+				<p>
+					{fm?.authors.includes(",") ? "Authors: " : "Author: "}
+					<span>{fm?.authors}</span>
+				</p>
 			</div>
 		</Suspense>
 	);

@@ -1,0 +1,71 @@
+---
+import AuthForm from "🧩/AuthForm.astro";
+type Props = {
+  class?: string;
+};
+
+const { class: className }: Props = Astro.props;
+---
+
+<AuthForm id="signup-form" title="Sign up">
+  <label>Email</label>
+  <input type="email" name="email" id="email" required />
+  <label>Password</label>
+  <input
+    type="password"
+    id="password"
+    name="password"
+    pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}"
+    title="Password must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+    required
+  />
+  <input type="submit" id="signup-button" value="🍭 Sign up 🍭" />
+  <div class="signin-now" slot="after-form">
+    Already have an account? <a href="/auth/signin">Sign in NOW</a>
+  </div>
+</AuthForm>
+
+<script>
+  import { supabase } from "👽/supabase/client";
+  const form = document.querySelector("#signup-form") as HTMLFormElement;
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const email = formData.get("email")?.toString();
+    const password = formData.get("password")?.toString();
+    if (!email || !password) {
+      alert("Email and password are required");
+      return;
+    }
+    const {
+      data: { session, user },
+      error,
+    } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+    });
+    if (error) {
+      alert(error);
+    } else {
+      alert("Sign up successful");
+    }
+  });
+</script>
+
+<style>
+  form {
+    @apply mx-auto grid grid-cols-[max-content,1fr] gap-5;
+    [type="submit"] {
+      @apply col-span-full mx-auto rounded-md border-none px-2 py-1;
+      @apply bg-indigo-300 text-base font-medium text-sky-700 ring-indigo-200 ring-offset-2;
+      @apply duration-500 hover:scale-105 hover:ring-4;
+    }
+  }
+  .signin-now {
+    @apply col-span-full mx-auto rounded-lg bg-indigo-100 pl-3;
+    a {
+      @apply h-full items-center rounded-lg border-2 bg-indigo-200 px-3 py-1 font-medium text-sky-700;
+      @apply hover:animate-[shake_500ms];
+    }
+  }
+</style>

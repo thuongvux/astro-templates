@@ -1,0 +1,11 @@
+@tailwind base;
+
+@layer base {
+  * {
+    @apply leading-normal;
+  }
+  html {
+    --scrollbar-width: 16px;
+    @apply max-w-[calc(100vw-var(--scrollbar-width))];
+  }
+}

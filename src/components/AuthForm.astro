@@ -1,0 +1,33 @@
+---
+import type { HTMLAttributes } from "astro/types";
+type Props = {
+  id?: string;
+  class?: string;
+  title: string;
+} & HTMLAttributes<"form">;
+
+const { id, class: className, title, ...attrs }: Props = Astro.props;
+---
+
+<fieldset class={className} title={title}>
+  <legend>{title}</legend>
+  <slot name="before-form" />
+  <form id={id} {...attrs} data-astro-reload>
+    <slot />
+  </form>
+  <slot name="after-form" />
+</fieldset>
+
+<style>
+  fieldset {
+    @apply flex flex-col gap-5;
+    @apply mx-auto min-w-[600px] max-w-[960px] px-10 py-8;
+    @apply rounded-lg border-4 border-dashed border-gray-300 bg-indigo-50 shadow-lg shadow-slate-200;
+    > legend {
+      @apply px-2 text-lg font-bold uppercase text-indigo-500;
+    }
+    form {
+      @apply w-full;
+    }
+  }
+</style>

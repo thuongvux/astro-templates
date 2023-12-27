@@ -1,0 +1,77 @@
+@import "../styles/fonts.css";
+@import "../styles/tailwind.css";
+
+:root {
+  --hue: 150;
+  --light: 40%;
+  --bg: hsl(var(--hue) 50% 99%);
+  --bg-2nd: hsl(var(--hue) 50% 96%);
+  --bg-3rd: hsl(var(--hue) 50% 92%);
+  --paragraph: #000c;
+  --headings: #222c;
+  --selection: hsl(var(--hue) 45% 40%);
+}
+html {
+  @apply bg-[--bg] font-sans text-[20px] font-light text-[--paragraph];
+  @apply lg:overflow-x-hidden;
+}
+body {
+  @apply relative flex flex-col items-center;
+}
+main {
+  @apply my-10 w-[clamp(35vw,1200px,100%-40px)];
+}
+::selection {
+  @apply bg-[--selection] text-white;
+}
+:is(img, picture, video, canvas, svg) {
+  @apply h-auto max-w-full bg-cover drag-none;
+  vertical-align: middle;
+  shape-margin: 0.75rem;
+}
+:is(input, button, textarea, select) {
+  font: inherit;
+}
+:is(h1, h2, h3, h4, h5, h6) {
+  @apply font-title font-medium text-[--headings];
+}
+h1 {
+  @apply text-[2rem] font-bold;
+}
+h2 {
+  @apply text-[1.7rem] font-semibold;
+}
+h3 {
+  @apply text-[1.375rem];
+}
+h4 {
+  @apply text-[1.25rem];
+}
+p {
+  @apply break-words text-[--text];
+  + p {
+    @apply my-[0.4rem];
+  }
+}
+a {
+  @apply relative inline-block w-fit indent-0 drag-none;
+  @apply highlight-hover;
+}
+li {
+  @apply list-none;
+}
+form {
+  label {
+    @apply my-auto;
+  }
+  input {
+    @apply px-3 py-1 text-sm;
+    @apply rounded-sm border-2 border-gray-200 outline-2 outline-gray-400;
+    &:user-invalid {
+      @apply bg-red-50 outline-dotted outline-red-500;
+    }
+    &[type="submit"] {
+      @apply cursor-pointer place-self-center;
+    }
+  }
+}

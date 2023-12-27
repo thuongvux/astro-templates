@@ -1,0 +1,42 @@
+---
+type Props = {
+  id?: string;
+  class?: string;
+  action: string;
+  method: "get" | "post" | "put" | "delete";
+  submitValue?: string;
+};
+
+const { id, class: className, action, method, submitValue }: Props = Astro.props;
+---
+
+<form id={id} class={className} data-action={action} data-method={method} data-astro-reload>
+  <slot />
+  <input type="submit" value={submitValue ?? "Submit"} />
+</form>
+
+<script>
+  const forms = document.querySelectorAll("form");
+  forms.forEach((form) => {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const action = form.dataset.action;
+      const method = form.dataset.method ?? "get";
+      const formData = new FormData(form);
+      if (!action) {
+        throw "Action is required";
+      }
+      const res = await fetch(action, {
+        method: method,
+        body: method != "get" ? formData : null,
+      });
+      if (res.redirected) {
+        window.location.replace(res.url);
+      }
+      try {
+        const json = await res.json();
+        console.log(json);
+      } catch (error) {}
+    });
+  });
+</script>
