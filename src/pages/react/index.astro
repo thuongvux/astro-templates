@@ -1,0 +1,8 @@
+---
+import Default from "#/layouts/Default.astro";
+import Counter from "./_Counter.tsx";
+---
+
+<Default title="Welcome to my place" class="flex flex-col justify-center">
+  <Counter client:load />
+</Default>

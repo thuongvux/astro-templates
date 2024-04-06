@@ -1,0 +1,165 @@
+---
+type Props = {
+  type?: "_none" | "default" | "flipping" | "ping";
+};
+
+const { type = "default" }: Props = Astro.props;
+---
+
+<div class="loader hidden" transition:persist>
+  <figure class={type}>
+    {
+      Array.from({ length: 5 })
+        .fill(0)
+        .map((e) => <div />)
+    }
+  </figure>
+</div>
+
+<style is:global>
+  .loader {
+    @apply fixed left-10 top-10 size-[3rem] container-queries *:size-full;
+    .default {
+      @apply absolute inset-0 m-auto;
+      animation: season-rotate 2s linear infinite;
+      > * {
+        @apply absolute m-auto size-[40cqi] rounded-full;
+        &:nth-child(1) {
+          @apply inset-0 animate-[season-flash_2s_linear_infinite] bg-white opacity-0;
+        }
+        &:nth-child(2) {
+          @apply bottom-0 left-0 top-0 animate-[season-dotsY_2s_linear_infinite] bg-[#ff4444];
+        }
+        &:nth-child(3) {
+          @apply left-0 right-0 top-0 animate-[season-dotsX_2s_linear_infinite] bg-[#ffbb33];
+        }
+        &:nth-child(4) {
+          @apply bottom-0 right-0 top-0 animate-[season-dotsY_2s_linear_infinite] bg-[#99cc00];
+        }
+        &:nth-child(5) {
+          @apply bottom-0 left-0 right-0 animate-[season-dotsX_2s_linear_infinite] bg-[#33b5e5];
+        }
+      }
+      @keyframes season-rotate {
+        0% {
+          transform: rotate(0);
+        }
+        10% {
+          width: 100%;
+          height: 100%;
+        }
+        66% {
+          width: 40cqi;
+          height: 40cqi;
+        }
+        100% {
+          transform: rotate(360deg);
+          width: 100%;
+          height: 100%;
+        }
+      }
+      @keyframes season-flash {
+        33% {
+          opacity: 0;
+          border-radius: 0%;
+        }
+        50% {
+          opacity: 0.6;
+          border-radius: 100%;
+        }
+        66% {
+          opacity: 0;
+        }
+      }
+      @keyframes season-dotsY {
+        66% {
+          opacity: 0.1;
+          width: 40cqi;
+        }
+        77% {
+          opacity: 1;
+          width: 0;
+        }
+      }
+      @keyframes season-dotsX {
+        66% {
+          opacity: 0.1;
+          height: 40cqi;
+        }
+        77% {
+          opacity: 1;
+          height: 0;
+        }
+      }
+    }
+    .ping {
+      @apply animate-growing rounded-full bg-indigo-400;
+    }
+    /* https://css-loaders.com/flipping/ */
+    .flipping {
+      display: flex;
+      animation: flipping-0 2s infinite steps(1);
+      &::before,
+      &::after {
+        content: "";
+        flex: 1;
+        animation:
+          flipping-1 1s infinite linear alternate,
+          flipping-2 2s infinite steps(1) -0.5s;
+      }
+      &::after {
+        --s: -1, -1;
+      }
+      @keyframes flipping-0 {
+        0% {
+          transform: scaleX(1) rotate(0deg);
+        }
+        50% {
+          transform: scaleX(-1) rotate(-90deg);
+        }
+      }
+      @keyframes flipping-1 {
+        0%,
+        5% {
+          transform: scale(var(--s, 1)) translate(0px) perspective(150px)
+            rotateY(0deg);
+        }
+        33% {
+          transform: scale(var(--s, 1)) translate(-10px) perspective(150px)
+            rotateX(0deg);
+        }
+        66% {
+          transform: scale(var(--s, 1)) translate(-10px) perspective(150px)
+            rotateX(-180deg);
+        }
+        95%,
+        100% {
+          transform: scale(var(--s, 1)) translate(0px) perspective(150px)
+            rotateX(-180deg);
+        }
+      }
+      @keyframes flipping-2 {
+        0% {
+          background: #40a2e3;
+          border-radius: 0;
+        }
+        50% {
+          background: #0d9276;
+          border-radius: 100px 0 0 100px;
+        }
+      }
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("astro:before-preparation", (e) => {
+    document.title = "Loading...";
+    document.querySelector(".loader")?.classList.toggle("hidden");
+  });
+  document.addEventListener("astro:after-swap", () => {
+    setTimeout(() => {
+      document.querySelector(".loader")?.classList.toggle("hidden");
+    }, 1000);
+  });
+</script>

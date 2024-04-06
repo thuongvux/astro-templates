@@ -1,0 +1,39 @@
+---
+type Props = {
+  id?: string;
+  class?: string;
+};
+
+const { id, class: className }: Props = Astro.props;
+
+const cleanRoutes = [];
+const routes = [
+  ...(await Astro.glob("src/pages/*.astro")),
+  ...(await Astro.glob("src/pages/*/index.astro")),
+];
+for (const route of routes) {
+  if (
+    route.url === "" ||
+    route.url === "/404" ||
+    route.url === Astro.url.pathname
+  ) {
+    continue;
+  }
+  const title = route.url?.match(/([^\/]*)$/)?.[0].replaceAll(/[^\w]/g, " ");
+  cleanRoutes.push({ title: title, ...route });
+}
+---
+
+<section id={id} class={className ?? "routes"}>
+  <ol class="list-inside">
+    {
+      cleanRoutes.map((route) => (
+        <li>
+          <a href={route.url} class="first-letter:capitalize">
+            {route.title}
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+</section>

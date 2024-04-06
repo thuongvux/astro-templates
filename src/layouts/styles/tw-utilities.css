@@ -1,0 +1,21 @@
+@tailwind utilities;
+
+@layer utilities {
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .absolute-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+  }
+  .fixed-center {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    translate: -50% -50%;
+  }
+}

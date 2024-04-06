@@ -1,0 +1,38 @@
+@import "./tw-base.css";
+@import "./tw-components.css";
+@import "./tw-utilities.css";
+
+:root {
+  color-scheme: light dark;
+  --hue: 250;
+  --light: 40%;
+  --selection: hsl(var(--hue) 25% 40% / 80%);
+  --bg: light-dark(hsl(var(--hue) 10% 90%), hsl(var(--hue) 30% 10% / 10%));
+  --bg-2nd: light-dark(hsl(var(--hue) 20% 85%), hsl(var(--hue) 30% 70% / 12%));
+  --bg-3rd: light-dark(hsl(var(--hue) 50% 80%), hsl(var(--hue) 30% 90% / 15%));
+  --paragraph: light-dark(#000c, #eeec);
+  --headings: light-dark(#222c, #fffc);
+}
+
+html {
+  @apply text-[20px];
+  overflow: auto;
+  scrollbar-gutter: stable both-edges;
+}
+body {
+  @apply relative flex flex-col items-center;
+}
+main {
+  @apply min-h-screen w-[clamp(35vw,1200px,100%)] py-10;
+}
+form {
+  label {
+    @apply my-auto;
+  }
+  input {
+    @apply rounded-sm border-2 border-gray-200 px-3 py-1 text-sm outline-2 outline-gray-400;
+    &:user-invalid {
+      @apply bg-red-50 outline-dotted outline-red-500;
+    }
+  }
+}

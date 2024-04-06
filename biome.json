@@ -1,0 +1,28 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.6.3/schema.json",
+	"files": {
+		"ignore": ["node_modules/", ".astro/", ".vercel/"]
+	},
+	"formatter": {
+		"lineWidth": 100
+	},
+	"javascript": {
+		"globals": ["Astro"]
+	},
+	"linter": {
+		"rules": {
+			"style": {
+				"useImportType": "off"
+			},
+			"suspicious": {
+				"noExplicitAny": "off"
+			},
+			"nursery": {
+				"useSortedClasses": "warn"
+			}
+		}
+	},
+	"organizeImports": {
+		"enabled": true
+	}
+}

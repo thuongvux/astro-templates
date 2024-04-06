@@ -1,0 +1,14 @@
+---
+import type { HTMLAttributes } from "astro/types";
+type Props = {
+  src: string;
+  srcset: string;
+} & HTMLAttributes<"img">;
+
+const { src, srcset, ...attrs }: Props = Astro.props;
+---
+
+<picture>
+  <source srcset={srcset} media="(prefers-color-scheme: dark)" />
+  <img src={src} {...attrs} />
+</picture>

@@ -1,0 +1,148 @@
+@tailwind components;
+
+@layer components {
+  /* Markdown styling */
+  .markdown {
+    --headings: oklch(32% 0.23 var(--hue) / 68%);
+    @apply rounded-lg bg-[--bg-2nd] px-4;
+    @apply headings-index;
+    .cover {
+      @apply mt-6 aspect-[3.14] w-full rounded-xl object-cover;
+    }
+    .title {
+      --text-title: oklch(25% 0.23 var(--hue) / 75%);
+      @apply my-4 text-pretty text-center indent-0 font-title text-4xl font-medium text-[--text-title];
+    }
+    .authors {
+      @apply mb-6 mr-6 mt-12 text-right text-lg font-medium text-gray-400;
+      span {
+        @apply bg-gradient-to-r from-[hsl(calc(var(--hue)-30)_50%_45%)] to-[hsl(calc(var(--hue)+30)_50%_45%)] bg-clip-text text-transparent;
+      }
+    }
+    a {
+      @apply text-blue-700 underline decoration-1 underline-offset-[3px];
+    }
+    article > p:not(:has(img, a)) {
+      @apply text-justify indent-6;
+    }
+    blockquote:not(:has(img)) {
+      @apply my-2 rounded-r-lg border-l-[0.25rem] border-[hsl(var(--hue)_40%_50%)] bg-[--bg-3rd] px-4 py-1 text-sm;
+    }
+    ol > li:not(:has(img)) {
+      --text-list-item: oklch(45% 0.2 var(--hue) / 75%);
+      @apply my-2 ml-6 list-[lower-alpha];
+      &::marker {
+        @apply font-medium text-[--text-list-item];
+      }
+    }
+    ul > li:not(:has(img)) {
+      @apply my-1 ml-6 list-["🔹"];
+    }
+    :is(p, li):has(img) {
+      > img {
+        @apply w-full rounded-xl object-cover;
+      }
+      > :is(em, strong) {
+        @apply mx-3 my-1 !line-clamp-2 text-xs font-light;
+      }
+    }
+    p:has(img) {
+      @apply float-right ml-6 w-[27%];
+    }
+    li:has(img) {
+      @apply float-left mr-6 w-[27%] text-base;
+    }
+    table {
+      @apply mx-auto my-4;
+      :is(th, tr, td) {
+        @apply border-[1px] border-gray-600;
+      }
+      th {
+        @apply font-medium;
+      }
+      td {
+        @apply px-3 py-0.5 text-sm first:italic;
+      }
+    }
+    pre > code {
+      @apply flex flex-col text-sm;
+      pre {
+        @apply mx-auto my-2 w-2/3 rounded-lg px-4 py-2;
+        @apply text-wrap !bg-[hsl(var(--hue)_20%_30%)] font-mono drop-shadow-lg;
+      }
+    }
+    :not(pre) > code {
+      @apply rounded-sm bg-[hsl(var(--hue)_50%_80%)] px-1 text-sm;
+    }
+  }
+
+  /* Adjust KaTeX styles */
+  .katex {
+    .mord.text {
+      @apply font-sans text-[calc(1em/1.21)] font-light;
+    }
+    .tag {
+      @apply mx-2;
+      span {
+        @apply !font-medium;
+      }
+    }
+  }
+
+  /* Indexing headings */
+  .headings-index {
+    > :has(h1 ~ h1) {
+      counter-reset: h1;
+      > h1::before {
+        counter-increment: h1;
+        content: counter(h1, upper-alpha) ". ";
+      }
+    }
+    h1 {
+      counter-reset: h2;
+    }
+    h1 ~ h2::before {
+      counter-increment: h2;
+      content: counter(h2, decimal) ". ";
+    }
+  }
+
+  /* Highlight on scroll */
+  .highlight-scroll {
+    --value: 0;
+    --height: 100%;
+    --bg: hsl(200 80% 80%);
+    :is(b, strong) {
+      --bg: hsl(45 80% 80%);
+    }
+    p:has(i, b, em, strong) {
+      @apply animate-value ease-in-out animation-view;
+      animation-range: 0% 30%;
+    }
+    :is(i, b, em, strong) {
+      @apply overflow-hidden rounded-[0.15em] duration-1000;
+      background: linear-gradient(90deg, var(--bg) 50%, transparent 50%) 0% /
+        200% var(--height) no-repeat;
+      background-position: calc((1 - var(--value)) * 120%) 0px;
+    }
+  }
+
+  /* Highlight on hover */
+  .highlight-hover {
+    --highlight-color: hsl(70 60% 78%);
+    @apply relative;
+    &::before {
+      @apply absolute inset-0 z-[-1] inline-block rounded-[0.5em] bg-[--highlight-color] transition-transform content-[""];
+      @apply origin-bottom-right scale-x-0 duration-500;
+    }
+    &:hover::before {
+      @apply origin-bottom-left scale-x-100 duration-1000;
+    }
+  }
+
+  /* ErrorBox styling */
+  .error-box {
+    @apply fixed-center;
+    @apply max-w-[600px] text-balance border-2 border-dashed border-red-500 px-3 py-1 text-center;
+  }
+}

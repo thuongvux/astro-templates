@@ -1,0 +1,55 @@
+@tailwind base;
+
+@layer base {
+  * {
+    @apply leading-normal;
+  }
+  html {
+    @apply bg-[--bg,ghostwhite] font-sans font-light text-[--paragraph,#000c];
+  }
+  ::selection {
+    @apply bg-[--selection,darkslateblue] text-white;
+  }
+  :is(input, button, textarea, select) {
+    font: inherit;
+  }
+  :is(img, picture, video, canvas, svg) {
+    @apply h-auto max-w-full bg-cover align-middle drag-none;
+  }
+  :is(h1, h2, h3, h4, h5, h6) {
+    @apply my-[0.4em] font-headings text-[--headings,#222c];
+  }
+  h1 {
+    @apply text-[1.5rem] font-bold;
+  }
+  h2 {
+    @apply text-[1.375rem] font-semibold;
+  }
+  h3 {
+    @apply text-[1.25rem] font-medium;
+  }
+  h4 {
+    @apply text-[1.125rem] font-medium;
+  }
+  strong {
+    @apply font-medium;
+  }
+  em {
+    @apply italic;
+  }
+  p + p {
+    @apply my-[0.4rem];
+  }
+  a {
+    @apply inline-block w-fit drag-none;
+  }
+  ol {
+    @apply list-decimal;
+  }
+  ul {
+    @apply list-disc;
+  }
+  input[type="submit"] {
+    @apply cursor-pointer place-self-center;
+  }
+}

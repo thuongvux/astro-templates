@@ -1,0 +1,27 @@
+---
+type Props = {
+  type?: "_none" | "default" | "flipping" | "ping";
+};
+
+const { type = "default" }: Props = Astro.props;
+---
+
+<img
+  id="loader-svg"
+  src="/loader-default.svg"
+  alt=""
+  class="fixed left-10 top-10 hidden size-[80px]"
+  transition:persist
+/>
+
+<script>
+  document.addEventListener("astro:before-preparation", (e) => {
+    document.title = "Loading...";
+    document.querySelector("#loader-svg")?.classList.toggle("hidden");
+  });
+  document.addEventListener("astro:after-swap", () => {
+    setTimeout(() => {
+      document.querySelector("#loader-svg")?.classList.toggle("hidden");
+    }, 1000);
+  });
+</script>
