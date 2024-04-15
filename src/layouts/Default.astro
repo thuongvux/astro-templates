@@ -7,21 +7,21 @@ import Base from "#/layouts/Base.astro";
 import "#/layouts/styles/default.css";
 
 type Props = {
-  title?: string;
-  description?: string;
-  class?: string;
-  options?: {
-    viewTransitions?: boolean;
-    type?: ComponentProps<typeof LoaderSVG>["type"];
-  };
+	title?: string;
+	description?: string;
+	class?: string;
+	options?: {
+		viewTransitions?: boolean;
+		type?: ComponentProps<typeof LoaderSVG>["type"];
+	};
 };
 const {
-  title,
-  description,
-  class: className,
-  options = {
-    viewTransitions: true,
-  },
+	title,
+	description,
+	class: className,
+	options = {
+		viewTransitions: true,
+	},
 }: Props = Astro.props;
 ---
 

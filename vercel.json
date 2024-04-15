@@ -1,5 +1,5 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "installCommand": "bun install",
-  "regions": ["sin1"]
+	"$schema": "https://openapi.vercel.sh/vercel.json",
+	"installCommand": "bun install",
+	"regions": ["sin1"]
 }

@@ -5,18 +5,18 @@ import { defineConfig } from "astro/config";
 
 // https://astro.build/config
 export default defineConfig({
-  adapter: vercel(),
-  integrations: [
-    tailwind({
-      nesting: true,
-    }),
-    react(),
-  ],
-  markdown: {},
-  output: "hybrid",
-  prefetch: true,
-  devToolbar: { enabled: false },
-  experimental: {
-    clientPrerender: true,
-  },
+	adapter: vercel(),
+	integrations: [
+		tailwind({
+			nesting: true,
+		}),
+		react(),
+	],
+	markdown: {},
+	output: "hybrid",
+	prefetch: true,
+	devToolbar: { enabled: false },
+	experimental: {
+		clientPrerender: true,
+	},
 });

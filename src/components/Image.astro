@@ -1,8 +1,8 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 type Props = {
-  src: string;
-  srcset: string;
+	src: string;
+	srcset: string;
 } & HTMLAttributes<"img">;
 
 const { src, srcset, ...attrs }: Props = Astro.props;
