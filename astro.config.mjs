@@ -12,11 +12,14 @@ export default defineConfig({
 		}),
 		react(),
 	],
-	markdown: {},
 	output: "hybrid",
 	prefetch: true,
+	security: {
+		checkOrigin: true,
+	},
 	devToolbar: { enabled: false },
 	experimental: {
+		actions: true,
 		clientPrerender: true,
 	},
 });
