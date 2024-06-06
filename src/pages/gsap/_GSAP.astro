@@ -22,21 +22,29 @@ const { id, class: className }: Props = Astro.props;
   >
   </div>
   <h4 class="pointer-events-none absolute bottom-4">Spin us, Drag us...</h4>
-
-  <script>
-    import { gsap } from "gsap";
-    import { Draggable } from "gsap/Draggable";
-    gsap.registerPlugin(Draggable);
-
-    // C1.
-    new Draggable("#box-1", {
-      type: "rotation",
-    });
-
-    // C2.
-    Draggable.create("#box-2", {
-      type: "x,y",
-      bounds: "#gsap-container",
-    });
-  </script>
 </div>
+
+<script>
+  import { gsap } from "gsap";
+  import { Draggable } from "gsap/Draggable";
+  document.addEventListener(
+    "astro:page-load",
+    () => {
+      gsap.registerPlugin(Draggable);
+
+      // C1.
+      new Draggable("#box-1", {
+        type: "rotation",
+      });
+
+      // C2.
+      Draggable.create("#box-2", {
+        type: "x,y",
+        bounds: "#gsap-container",
+      });
+    },
+    {
+      once: false,
+    }
+  );
+</script>
