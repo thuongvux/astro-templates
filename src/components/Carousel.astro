@@ -24,21 +24,21 @@ const { id, class: className }: Props = Astro.props;
 
 <style>
   .carousel {
-    @apply flex snap-x snap-mandatory overflow-y-hidden overflow-x-scroll hide-scrollbar;
-    .carousel-item {
-      @apply aspect-[18/9] h-[300px] select-none snap-center object-cover drag-none first:ml-[50%] last:mr-[50%];
-      animation: focus-item;
-      animation-timeline: view(inline);
-      animation-range: cover 30% cover 70%;
-      scale: 0.8;
-      filter: grayscale(100%);
-      border-radius: 6px;
-      @keyframes focus-item {
-        50% {
-          scale: 1;
-          filter: grayscale(0%);
-          border-radius: 24px;
-        }
+    @apply flex snap-x snap-mandatory overflow-y-hidden overflow-x-scroll overscroll-x-contain hide-scrollbar;
+  }
+  .carousel-item {
+    @apply aspect-[18/9] h-[300px] cursor-pointer select-none snap-center object-cover drag-none first:ml-[50%] last:mr-[50%];
+    animation: focus-item;
+    animation-timeline: view(inline);
+    animation-range: cover 30% cover 70%;
+    scale: 0.8;
+    filter: grayscale(100%);
+    border-radius: 6px;
+    @keyframes focus-item {
+      50% {
+        scale: 1;
+        filter: grayscale(0%);
+        border-radius: 24px;
       }
     }
   }
@@ -46,18 +46,19 @@ const { id, class: className }: Props = Astro.props;
 
 <script>
   const carousel = document.querySelector(".carousel") as HTMLElement;
-  const firstChild = document.querySelector(".carousel-item") as HTMLElement;
+  const carouselItem = document.querySelector(".carousel-item") as HTMLElement;
+
   document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowRight") {
       e.preventDefault();
-      carousel.scrollTo({
-        left: carousel.scrollLeft + firstChild.offsetWidth,
+      carousel.scrollBy({
+        left: carouselItem.offsetWidth,
         behavior: "smooth",
       });
     } else if (e.key === "ArrowLeft") {
       e.preventDefault();
-      carousel.scrollTo({
-        left: carousel.scrollLeft - firstChild.offsetWidth,
+      carousel.scrollBy({
+        left: -carouselItem.offsetWidth,
         behavior: "smooth",
       });
     }
@@ -65,9 +66,7 @@ const { id, class: className }: Props = Astro.props;
   let prev: number;
   carousel.addEventListener("mousemove", (e) => {
     if (e.buttons === 1) {
-      console.log(e.screenX);
-      if (!prev) {
-      } else {
+      if (prev) {
         carousel.scrollBy({
           left: prev - e.screenX,
           behavior: "smooth",
