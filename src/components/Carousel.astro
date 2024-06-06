@@ -1,0 +1,45 @@
+---
+type Props = {
+  id?: string;
+  class?: string;
+};
+
+const { id, class: className }: Props = Astro.props;
+---
+
+<div class="carousel">
+  {
+    new Array(6).fill(0).map((e, i) => {
+      return (
+        <img
+          src={`https://source.unsplash.com/random/?nature&q=${i}`}
+          alt=""
+          class="carousel-item"
+          id={`carousel-item-${i + 1}`}
+        />
+      );
+    })
+  }
+</div>
+
+<style>
+  .carousel {
+    @apply flex snap-x snap-mandatory overflow-y-hidden overflow-x-scroll hide-scrollbar;
+    .carousel-item {
+      @apply aspect-[18/9] h-[300px] snap-center object-cover drag-none first:ml-[50%] last:mr-[50%];
+      animation: focus-item;
+      animation-timeline: view(inline);
+      animation-range: cover 30% cover 70%;
+      scale: 0.8;
+      filter: grayscale(100%);
+      border-radius: 6px;
+      @keyframes focus-item {
+        50% {
+          scale: 1;
+          filter: grayscale(0%);
+          border-radius: 24px;
+        }
+      }
+    }
+  }
+</style>

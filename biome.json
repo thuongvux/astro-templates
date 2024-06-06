@@ -3,22 +3,30 @@
 	"files": {
 		"ignore": ["node_modules/", ".astro/", ".vercel/"]
 	},
-	"formatter": {
-		"lineWidth": 100
+	"css": {
+		"formatter": {
+			"enabled": true
+		},
+		"linter": {
+			"enabled": true
+		}
 	},
 	"javascript": {
 		"globals": ["Astro"]
 	},
+	"formatter": {
+		"lineWidth": 100
+	},
 	"linter": {
 		"rules": {
+			"nursery": {
+				"useSortedClasses": "warn"
+			},
 			"style": {
 				"useImportType": "off"
 			},
 			"suspicious": {
 				"noExplicitAny": "off"
-			},
-			"nursery": {
-				"useSortedClasses": "warn"
 			}
 		}
 	},

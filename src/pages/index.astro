@@ -1,9 +1,11 @@
 ---
 import Bookmark from "#/components/Bookmark.astro";
+import Carousel from "#/components/Carousel.astro";
 import Default from "#/layouts/Default.astro";
 ---
 
 <Default title="Welcome to my place">
   <h1>Hello, {Astro.url.pathname}</h1>
   <Bookmark />
+  <Carousel />
 </Default>
