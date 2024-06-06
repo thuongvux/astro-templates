@@ -16,18 +16,27 @@ import Default from "#/layouts/Default.astro";
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
-  gsap.registerPlugin(ScrollTrigger);
-  gsap.to(".box-2", {
-    scrollTrigger: {
-      markers: true,
-      trigger: ".box-2",
-      endTrigger: ".box-3",
-      end: "top center",
-      toggleActions: "restart pause reverse pause",
+  document.addEventListener(
+    "astro:page-load",
+    () => {
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.to(".box-2", {
+        scrollTrigger: {
+          markers: true,
+          trigger: ".box-2",
+          start: "top 70%",
+          endTrigger: ".box-3",
+          end: "top center",
+          toggleActions: "restart pause reverse pause",
+        },
+        x: 400,
+        rotate: 360,
+        ease: "none",
+        duration: 3,
+      });
     },
-    x: 400,
-    rotate: 360,
-    ease: "none",
-    duration: 3,
-  });
+    {
+      once: false,
+    }
+  );
 </script>
