@@ -1,6 +1,18 @@
 @tailwind components;
 
 @layer components {
+  /* Background grid */
+  .bg-grid::before {
+    --size: 48px;
+    --line: color-mix(in lch, canvasText, transparent 85%);
+    @apply pointer-events-none fixed inset-0 h-screen w-screen content-[""];
+    background:
+      linear-gradient(90deg, var(--line) 1px, transparent 1px var(--size)) 50%
+        50% / var(--size) var(--size),
+      linear-gradient(var(--line) 1px, transparent 1px var(--size)) 50% 50% /
+        var(--size) var(--size);
+    mask: linear-gradient(-25deg, transparent 30%, white);
+  }
   /* Markdown styling */
   .markdown {
     --headings: oklch(32% 0.23 var(--hue) / 68%);

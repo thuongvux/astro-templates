@@ -12,10 +12,10 @@ const { id, class: className }: Props = Astro.props;
     new Array(6).fill(0).map((e, i) => {
       return (
         <img
+          id={`carousel-item-${i}`}
+          class="carousel-item"
           src={`/imgs/${i}.png`}
           alt="https://source.unsplash.com/1600x900/?nature"
-          class="carousel-item"
-          id={`carousel-item-${i}`}
         />
       );
     })
@@ -79,7 +79,6 @@ const { id, class: className }: Props = Astro.props;
           prev = e.screenX;
         }
       });
-      document.addEventListener("mouseup", (e) => {});
     },
     {
       once: false,

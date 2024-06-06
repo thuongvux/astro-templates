@@ -13,7 +13,6 @@
   --paragraph: light-dark(#000c, #eeec);
   --headings: light-dark(#222c, #fffc);
 }
-
 html {
   @apply text-[20px];
   overflow: auto;
@@ -21,6 +20,7 @@ html {
 }
 body {
   @apply relative flex flex-col items-center;
+  @apply bg-grid;
 }
 main {
   @apply min-h-screen w-[clamp(35vw,1200px,100%)] py-10;
