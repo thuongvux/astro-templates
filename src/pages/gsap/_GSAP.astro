@@ -32,12 +32,10 @@ const { id, class: className }: Props = Astro.props;
     () => {
       gsap.registerPlugin(Draggable);
 
-      // C1.
-      new Draggable("#box-1", {
+      Draggable.create("#box-1", {
         type: "rotation",
       });
 
-      // C2.
       Draggable.create("#box-2", {
         type: "x,y",
         bounds: "#gsap-container",
