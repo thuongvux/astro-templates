@@ -1,0 +1,42 @@
+---
+type Props = {
+  id?: string;
+  class?: string;
+};
+
+const { id, class: className }: Props = Astro.props;
+---
+
+<div
+  id="gsap-container"
+  class="relative flex h-[500px] items-center justify-around border-2 border-dashed border-indigo-100"
+>
+  <div
+    id="box-1"
+    class="aspect-square w-[120px] cursor-pointer rounded-md bg-indigo-500"
+  >
+  </div>
+  <div
+    id="box-2"
+    class="aspect-square w-[120px] cursor-pointer rounded-md bg-orange-500"
+  >
+  </div>
+  <h4 class="pointer-events-none absolute bottom-4">Spin us, Drag us...</h4>
+
+  <script>
+    import { gsap } from "gsap";
+    import { Draggable } from "gsap/Draggable";
+    gsap.registerPlugin(Draggable);
+
+    // C1.
+    new Draggable("#box-1", {
+      type: "rotation",
+    });
+
+    // C2.
+    Draggable.create("#box-2", {
+      type: "x,y",
+      bounds: "#gsap-container",
+    });
+  </script>
+</div>
