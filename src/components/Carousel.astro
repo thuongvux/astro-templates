@@ -12,10 +12,10 @@ const { id, class: className }: Props = Astro.props;
     new Array(6).fill(0).map((e, i) => {
       return (
         <img
-          src={`https://source.unsplash.com/random/?nature&q=${i}`}
+          src={`/imgs/${i}.png`}
           alt=""
           class="carousel-item"
-          id={`carousel-item-${i + 1}`}
+          id={`carousel-item-${i}`}
         />
       );
     })
@@ -26,7 +26,7 @@ const { id, class: className }: Props = Astro.props;
   .carousel {
     @apply flex snap-x snap-mandatory overflow-y-hidden overflow-x-scroll hide-scrollbar;
     .carousel-item {
-      @apply aspect-[18/9] h-[300px] snap-center object-cover drag-none first:ml-[50%] last:mr-[50%];
+      @apply aspect-[18/9] h-[300px] select-none snap-center object-cover drag-none first:ml-[50%] last:mr-[50%];
       animation: focus-item;
       animation-timeline: view(inline);
       animation-range: cover 30% cover 70%;
@@ -43,3 +43,38 @@ const { id, class: className }: Props = Astro.props;
     }
   }
 </style>
+
+<script>
+  const carousel = document.querySelector(".carousel") as HTMLElement;
+  const firstChild = document.querySelector(".carousel-item") as HTMLElement;
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      carousel.scrollTo({
+        left: carousel.scrollLeft + firstChild.offsetWidth,
+        behavior: "smooth",
+      });
+    } else if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      carousel.scrollTo({
+        left: carousel.scrollLeft - firstChild.offsetWidth,
+        behavior: "smooth",
+      });
+    }
+  });
+  let prev: number;
+  carousel.addEventListener("mousemove", (e) => {
+    if (e.buttons === 1) {
+      console.log(e.screenX);
+      if (!prev) {
+      } else {
+        carousel.scrollBy({
+          left: prev - e.screenX,
+          behavior: "smooth",
+        });
+      }
+      prev = e.screenX;
+    }
+  });
+  document.addEventListener("mouseup", (e) => {});
+</script>
