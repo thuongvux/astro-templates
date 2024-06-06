@@ -2,7 +2,7 @@
 import Default from "#/layouts/Default.astro";
 ---
 
-<Default title="Welcome to my place">
+<Default title="Welcome to my place" options={{ viewTransitions: false }}>
   <h1>Hello, {Astro.url.pathname}</h1>
   <div
     class="boxes flex min-h-[200vh] w-full flex-col items-center justify-around gap-[200px] py-[80vh] show-border"
@@ -16,27 +16,19 @@ import Default from "#/layouts/Default.astro";
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
-  document.addEventListener(
-    "astro:page-load",
-    () => {
-      gsap.registerPlugin(ScrollTrigger);
-      gsap.to(".box-2", {
-        scrollTrigger: {
-          markers: true,
-          trigger: ".box-2",
-          start: "top 70%",
-          endTrigger: ".box-3",
-          end: "top center",
-          toggleActions: "restart pause reverse pause",
-        },
-        x: 400,
-        rotate: 360,
-        ease: "none",
-        duration: 3,
-      });
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.to(".box-2", {
+    scrollTrigger: {
+      markers: true,
+      trigger: ".box-2",
+      start: "top 70%",
+      endTrigger: ".box-3",
+      end: "top center",
+      toggleActions: "restart pause reverse pause",
     },
-    {
-      once: false,
-    }
-  );
+    x: 400,
+    rotate: 360,
+    ease: "none",
+    duration: 3,
+  });
 </script>

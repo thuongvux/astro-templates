@@ -1,4 +1,6 @@
 ---
+import { glob } from "glob";
+
 type Props = {
   id?: string;
   class?: string;
@@ -6,20 +8,32 @@ type Props = {
 
 const { id, class: className }: Props = Astro.props;
 const { pathname } = Astro.url;
-const routes = [];
-const instances = await Astro.glob("src/pages/**/*.astro");
-for (const { url: routePath } of instances) {
-  const fileDepth = routePath?.match(/\/./g)?.length ?? 0;
-  const routeDepth = pathname.match(/\/./g)?.length ?? 0;
-  if (
-    !routePath?.match(/(\/404)|(\/\_.*$)/) &&
-    routePath?.startsWith(pathname) &&
-    fileDepth - routeDepth === 1
-  ) {
-    const title = routePath?.match(/([^\/]*)$/)?.[0].replaceAll(/[^\w]/g, " ");
-    routes.push({ title: title, url: routePath });
-  }
-}
+
+const files = await glob("src/pages/**/*.astro", {
+  posix: true,
+});
+const routes = files
+  .map((e) => {
+    const path =
+      e.replace("src/pages", "").replace(/(\/index)?\.astro/, "") || "/";
+    const depth = path?.match(/\/./g)?.length ?? 0;
+    const parrent = path?.replace(/\/[^\/]*$/, "") || "/";
+    const title = path?.match(/([^\/]*)$/)?.[0].replaceAll(/[^\w]/g, " ");
+    return {
+      depth: depth,
+      parrent: parrent,
+      path: path,
+      title: title,
+    };
+  })
+  .filter((e) => {
+    return (
+      e.depth && e.parrent === pathname && !e.path.match(/(\/404)|(\/\_.*$)/)
+    );
+  })
+  .sort((a, b) => {
+    return a.path > b.path ? 1 : -1;
+  });
 ---
 
 <section id={id} class={className ?? "routes"}>
@@ -27,7 +41,7 @@ for (const { url: routePath } of instances) {
     {
       routes.map((route) => (
         <li>
-          <a href={route.url} class="first-letter:capitalize">
+          <a href={route.path} class="first-letter:capitalize">
             {route.title}
           </a>
         </li>
