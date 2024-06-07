@@ -19,7 +19,6 @@ export default defineConfig({
 	},
 	devToolbar: { enabled: false },
 	experimental: {
-		actions: true,
 		clientPrerender: true,
 	},
 });

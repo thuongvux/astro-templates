@@ -5,7 +5,7 @@
 	"scripts": {
 		"astro": "astro",
 		"dev": "astro dev",
-		"build": "astro check && astro build",
+		"build": "astro build",
 		"preview": "astro preview",
 		"deploy": "astro check && astro build --remote && vercel deploy --prebuilt",
 		"format": "bunx @biomejs/biome format --write ./src"
